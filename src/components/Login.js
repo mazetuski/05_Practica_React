@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {authUser} from "../actions";
+import {authByApi} from "../store";
 
 class ConnectedLogin extends Component {
   state = {
@@ -34,10 +35,10 @@ class ConnectedLogin extends Component {
 
 const Login = connect(
     state => ({
-      isLogin: state.isLogin,
+      isLogin: state.auth.isLogin,
     }),
     dispatch => ({
-      auth: (username, password) => dispatch(authUser(username, password)),
+      auth: (username, password) => dispatch(authByApi(username, password)),
     }))(ConnectedLogin);
 
 export default Login;

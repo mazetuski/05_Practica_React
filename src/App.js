@@ -16,7 +16,8 @@ class App extends Component {
               <h1 className="App-title">Welcome to React</h1>
             </header>
             {
-              !store.getState().isLogin &&
+              console.log(store.getState().auth.isLogin) ||
+              !store.getState().auth.isLogin &&
               <Login />
             }
           </div>
