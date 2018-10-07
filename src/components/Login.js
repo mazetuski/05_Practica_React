@@ -1,7 +1,6 @@
 //Dependencies
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {authUser} from "../actions";
 import {authByApi} from "../store";
 
 class ConnectedLogin extends Component {
@@ -20,6 +19,7 @@ class ConnectedLogin extends Component {
 
   render() {
     return <div>
+      <h1>Logueado: {this.props.isLogin ? 'Si' : 'No'}</h1>
       <div>
         <label htmlFor="">Username</label>
         <input type="text" id='username' value={this.state.username} onChange={this.handleInput}/>

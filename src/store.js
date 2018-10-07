@@ -13,19 +13,18 @@ const initialState = {
 const authReducer = (state = {isLogin: false, isAuthenticating: false}, action) => {
   switch (action.type) {
     case LOGIN_STARTED:
+      console.log(state, action);
       return {...state, isLogin: false, isAuthenticating: true};
     case LOGIN_SUCCESS:
+      console.log(state, action);
       return {...state, isLogin: true, isAuthenticating: false, id: action.payload};
     default:
       return state
   }
 };
 
-const testReducer2 = (state = initialState) => state;
-
 const rootReducer = combineReducers({
-  auth: authReducer,
-  test2: testReducer2
+  auth: authReducer
 });
 
 const store = createStore(
