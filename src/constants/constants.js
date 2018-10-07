@@ -1,0 +1,1 @@
+export const urlApi = 'https://randomuser.me/api?results=20&seed=abc';
