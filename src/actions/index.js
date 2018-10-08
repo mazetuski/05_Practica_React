@@ -1,10 +1,4 @@
 import {createAction} from "redux-actions";
-import {AUTH_USER} from "../constants/actionTypes";
+import {AUTH_USER, LOGOUT} from "../constants/actionTypes";
 
-
-export const authUser = createAction(AUTH_USER, (username, password) =>
-    ({
-      username: username,
-      password: password
-    })
-);
+export const logoutUser = createAction(LOGOUT);

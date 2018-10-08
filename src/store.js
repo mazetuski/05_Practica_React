@@ -3,7 +3,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {handleActions} from 'redux-actions';
 import thunk from 'redux-thunk';
 import {urlApi} from "./constants/constants";
-import {LOGIN_STARTED, LOGIN_SUCCESS, LOGIN_ERROR} from "./constants/actionTypes";
+import {LOGIN_STARTED, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT} from "./constants/actionTypes";
 import {get} from "./utils/API-Service";
 
 const initialState = {
@@ -13,11 +13,11 @@ const initialState = {
 const authReducer = (state = {isLogin: false, isAuthenticating: false}, action) => {
   switch (action.type) {
     case LOGIN_STARTED:
-      console.log(state, action);
       return {...state, isLogin: false, isAuthenticating: true};
     case LOGIN_SUCCESS:
-      console.log(state, action);
       return {...state, isLogin: true, isAuthenticating: false, id: action.payload};
+    case LOGOUT:
+      return {...state, isLogin: false, isAuthenticating: false, id: null};
     default:
       return state
   }
