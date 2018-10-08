@@ -1,7 +1,7 @@
 //Dependencies
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {authByApi} from "../store";
+import {authByApi} from "../actions";
 
 class ConnectedLogin extends Component {
   state = {
