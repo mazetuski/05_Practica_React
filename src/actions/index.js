@@ -27,5 +27,5 @@ export const authByApi = (username, password) => async dispatch => {
 export const getAuthors = () => async dispatch => {
   dispatch({type: LOADING_STARTED});
   const users = await get(urlApi);
-  dispatch({type: UPDATE_AUTHORS, payload: users});
+  dispatch({type: UPDATE_AUTHORS, payload: users.results});
 };

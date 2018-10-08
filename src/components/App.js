@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Login from './Login';
 import Loading from './Loading';
 import Main from './Main';
+import AuthorList from './Authors/AuthorList';
 import {Link} from 'react-router-dom';
 
 class AppConnected extends Component {
@@ -23,7 +24,8 @@ class AppConnected extends Component {
               <Login/>
             }
             {
-              this.props.isLogin && <Link to="/logout">Logout</Link>
+              this.props.isLogin
+              && <AuthorList/>
             }
         </Main>
     );

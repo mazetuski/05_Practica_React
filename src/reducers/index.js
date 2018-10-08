@@ -27,6 +27,7 @@ const authorReducer = (state = {authors: [], isLoading: false}, action) => {
     case LOADING_STARTED:
       return {...state, isLoading: true};
     case UPDATE_AUTHORS:
+      console.log('holita');
       return {...state, authors: action.payload, isLoading: false};
     default :
       return state;
