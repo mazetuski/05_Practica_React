@@ -8,6 +8,7 @@ import {Provider} from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import Logout from './components/Logout';
+import Profile from './components/Profile'
 
 ReactDOM.render(
     <Provider store={store}>
@@ -15,6 +16,8 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App}/>
           <Route exact path="/logout" component={Logout}/>
+          <PrivateRoute path="/profile/:id" component={Profile}/>
+          <PrivateRoute exact path="/myprofile" component={Profile}/>
         </Switch>
       </BrowserRouter>
     </Provider>

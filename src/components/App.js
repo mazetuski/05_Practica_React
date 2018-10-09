@@ -6,11 +6,9 @@ import Login from './Login';
 import Loading from './Loading';
 import Main from './Main';
 import AuthorList from './Authors/AuthorList';
-import {Link} from 'react-router-dom';
 
 class AppConnected extends Component {
   render() {
-    console.log(this.props.isLogin);
     return (
         <Main>
             {
