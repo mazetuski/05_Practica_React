@@ -17,7 +17,8 @@ ReactDOM.render(
           <Route exact path="/" component={App}/>
           <Route exact path="/logout" component={Logout}/>
           <PrivateRoute path="/profile/:id" component={Profile}/>
-          <PrivateRoute exact path="/myprofile" component={Profile}/>
+          {/* this route is not necessary but I see it more understandable for the user*/}
+          <PrivateRoute exact path="/my-profile" component={Profile}/>
         </Switch>
       </BrowserRouter>
     </Provider>

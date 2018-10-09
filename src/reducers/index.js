@@ -33,7 +33,20 @@ const authorReducer = (state = {authors: [], isLoading: false, profile: null}, a
   }
 };
 
+// Reducer for articles
+const initialArticleState = {
+  articles: []
+};
+
+const articleReducer = (state = initialArticleState, action) => {
+  switch (action.type){
+    default:
+      return state;
+  }
+};
+
 export const rootReducer = combineReducers({
   auth: authReducer,
-  author: authorReducer
+  author: authorReducer,
+  article: articleReducer
 });

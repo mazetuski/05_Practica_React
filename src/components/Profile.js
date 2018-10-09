@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Main from './Main';
 import Loading from './Loading';
+import ArticleList from './Article/ArticleList';
+import ArticleForm from './Article/ArticleForm';
 
 class Profile extends Component {
-  constructor(){
-    super();
-    this.state = {
-      author: null,
-    };
-  }
+  state = {
+    author: null,
+  };
 
   refreshAuthor = (props) => {
     const id = props.match.params.id || props.user.login.uuid;
@@ -18,23 +17,36 @@ class Profile extends Component {
     this.setState({author: author});
   };
 
-  componentWillMount(){
+  componentWillMount() {
     this.refreshAuthor(this.props);
   }
 
-  componentWillReceiveProps(newProps){
+  componentWillReceiveProps(newProps) {
     this.refreshAuthor(newProps);
   }
 
   render() {
-    if(!this.state.author){
+    if (!this.state.author) {
       return <Main>
         <Loading/>
       </Main>
     }
+
+    const isLoggedUser = this.state.author.login.uuid === this.props.user.login.uuid;
     return <Main>
       <img src={this.state.author.picture.medium} alt=""/>
       <h2>{this.state.author.name.first} {this.state.author.name.last}</h2>
+      {/* if the page is the user profile then render his articles and a form */}
+      { isLoggedUser &&
+      <div>
+        <ArticleList/>
+        <ArticleForm/>
+      </div>
+      }
+      {/* if the page is not the user profile then render article list or subscription button */}
+      { isLoggedUser &&
+      <ArticleList/>
+      }
     </Main>
   }
 }
