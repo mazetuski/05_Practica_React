@@ -33,20 +33,22 @@ class Profile extends Component {
     }
 
     const isLoggedUser = this.state.author.login.uuid === this.props.user.login.uuid;
+    // TODO: HACER const isSubscriptor =
     return <Main>
       <img src={this.state.author.picture.medium} alt=""/>
       <h2>{this.state.author.name.first} {this.state.author.name.last}</h2>
       {/* if the page is the user profile then render his articles and a form */}
       { isLoggedUser &&
       <div>
-        <ArticleForm userId={this.state.author.login.uuid}/>
         <ArticleList userId={this.state.author.login.uuid}/>
+        <ArticleForm userId={this.state.author.login.uuid}/>
       </div>
       }
       {/* if the page is not the user profile then render article list or subscription button */}
-      { isLoggedUser &&
-      <ArticleList/>
+      { !isLoggedUser &&
+      <ArticleList userId={this.state.author.login.uuid}/>
       }
+      {/*TODO: añadir boton suscribirse*/}
     </Main>
   }
 }

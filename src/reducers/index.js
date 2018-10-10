@@ -4,7 +4,7 @@ import {
   LOGOUT,
   LOADING_STARTED,
   UPDATE_AUTHORS,
-  ADD_ARTICLE
+  ADD_ARTICLE, ADD_SUBSCRIPTION
 } from "../constants/actionTypes";
 import {combineReducers} from "redux";
 
@@ -36,7 +36,7 @@ const authorReducer = (state = {authors: [], isLoading: false, profile: null}, a
 
 // Reducer for articles
 const initialArticleState = {
-  articles: JSON.parse(localStorage.getItem('articles')) || []
+  articles: JSON.parse(localStorage.getItem('articles')) || [],
 };
 
 const articleReducer = (state = initialArticleState, action) => {
@@ -50,8 +50,23 @@ const articleReducer = (state = initialArticleState, action) => {
   }
 };
 
+const initialSubscriptionState = {
+  subscriptions: JSON.parse(localStorage.getItem('subscriptors')) || []
+};
+
+const subscriptionReducer = (state = initialSubscriptionState, action) => {
+  switch (action.type){
+    case ADD_SUBSCRIPTION:
+      const subscriptions = [...state.subscriptions, action.payload];
+      return {...state, subscriptions: subscriptions};
+    default:
+      return state;
+  }
+};
+
 export const rootReducer = combineReducers({
   auth: authReducer,
   author: authorReducer,
-  article: articleReducer
+  article: articleReducer,
+  subscription: subscriptionReducer
 });
