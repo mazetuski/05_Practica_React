@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {addArticles} from '../../actions';
+const uuidv1 = require('uuid/v1');
 
 class ArticleForm extends Component{
   state = {
@@ -7,16 +9,29 @@ class ArticleForm extends Component{
     description: ''
   };
 
+  validate = () => {
+    return this.state.title && this.state.description;
+  };
+
   handleInput = (event) => {
     this.setState({[event.target.id]: event.target.value});
   };
 
   handleSubmit = () => {
-    // TODO: do creation of an article
+    // check form inputs
+    if(!this.validate()) return;
+    // create article an add
+    const article = {
+      id: uuidv1(),
+      title: this.state.title,
+      description: this.state.description,
+      user: this.props.userId
+    };
+    this.props.addArticle(article);
   };
 
   render(){
-    return <form>
+    return <div>
       <div>
         <label htmlFor="title">Title</label>
         <input type="text" id='title' value={this.state.title} onChange={this.handleInput}/>
@@ -26,10 +41,10 @@ class ArticleForm extends Component{
         <textarea id='description' value={this.state.description} onChange={this.handleInput}/>
       </div>
       <button onClick={this.handleSubmit}>Create</button>
-    </form>
+    </div>
   }
 }
 
 export default connect(null, dispatch => ({
-
+  addArticle: article => dispatch(addArticles(article))
 }))(ArticleForm);

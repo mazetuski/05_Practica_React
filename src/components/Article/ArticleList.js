@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 const ArticleList = (props) => {
   return <div>
     {props.articles.map(article =>
-        <Article title={article.title} description={article.description}/>
+        article.user === props.userId &&
+        <Article key={article.id} title={article.title} description={article.description}/>
     )}
   </div>
 };

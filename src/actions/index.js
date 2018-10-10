@@ -5,6 +5,7 @@ import {
   LOGOUT,
   LOADING_STARTED,
   UPDATE_AUTHORS,
+  ADD_ARTICLE,
 } from "../constants/actionTypes";
 import {urlApi} from "../constants/constants";
 import {get} from "../utils/API-Service";
@@ -30,3 +31,6 @@ export const getAuthors = () => async dispatch => {
   const users = await get(urlApi);
   dispatch({type: UPDATE_AUTHORS, payload: users.results});
 };
+
+// Articles
+export const addArticles = article => ({type: ADD_ARTICLE, payload: article});

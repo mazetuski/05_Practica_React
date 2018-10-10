@@ -4,6 +4,7 @@ import {
   LOGOUT,
   LOADING_STARTED,
   UPDATE_AUTHORS,
+  ADD_ARTICLE
 } from "../constants/actionTypes";
 import {combineReducers} from "redux";
 
@@ -35,11 +36,15 @@ const authorReducer = (state = {authors: [], isLoading: false, profile: null}, a
 
 // Reducer for articles
 const initialArticleState = {
-  articles: []
+  articles: JSON.parse(localStorage.getItem('articles')) || []
 };
 
 const articleReducer = (state = initialArticleState, action) => {
   switch (action.type){
+    case ADD_ARTICLE:
+      const articles = [...state.articles, action.payload];
+      localStorage.setItem('articles', JSON.stringify(articles));
+      return {...state, articles: articles};
     default:
       return state;
   }

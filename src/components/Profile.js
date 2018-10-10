@@ -39,8 +39,8 @@ class Profile extends Component {
       {/* if the page is the user profile then render his articles and a form */}
       { isLoggedUser &&
       <div>
-        <ArticleList/>
-        <ArticleForm/>
+        <ArticleForm userId={this.state.author.id}/>
+        <ArticleList userId={this.state.author.id}/>
       </div>
       }
       {/* if the page is not the user profile then render article list or subscription button */}
