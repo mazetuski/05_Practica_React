@@ -5,7 +5,7 @@ import {
   LOGOUT,
   LOADING_STARTED,
   UPDATE_AUTHORS,
-  ADD_ARTICLE,
+  ADD_ARTICLE, ADD_SUBSCRIPTION, ACCEPT_SUBSCRIPTION, DECLINE_SUBSCRIPTION,
 } from "../constants/actionTypes";
 import {urlApi} from "../constants/constants";
 import {get} from "../utils/API-Service";
@@ -34,3 +34,8 @@ export const getAuthors = () => async dispatch => {
 
 // Articles
 export const addArticles = article => ({type: ADD_ARTICLE, payload: article});
+
+//Subscriptions
+export const addSubscriptions = subscription => ({type: ADD_SUBSCRIPTION, payload: subscription});
+export const acceptSubscription = subscription => ({type: ACCEPT_SUBSCRIPTION, payload: subscription});
+export const declineSubscription = subscription => ({type: DECLINE_SUBSCRIPTION, payload: subscription});

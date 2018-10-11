@@ -58,6 +58,7 @@ const subscriptionReducer = (state = initialSubscriptionState, action) => {
   switch (action.type){
     case ADD_SUBSCRIPTION:
       const subscriptions = [...state.subscriptions, action.payload];
+      localStorage.setItem('subscriptors', JSON.stringify(subscriptions));
       return {...state, subscriptions: subscriptions};
     default:
       return state;
