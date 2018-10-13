@@ -31,7 +31,6 @@ class ArticleForm extends Component{
   };
 
   render(){
-    console.log(this.props.userId);
     return <div>
       <div>
         <label htmlFor="title">Title</label>

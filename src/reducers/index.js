@@ -4,9 +4,10 @@ import {
   LOGOUT,
   LOADING_STARTED,
   UPDATE_AUTHORS,
-  ADD_ARTICLE, ADD_SUBSCRIPTION
+  ADD_ARTICLE, ADD_SUBSCRIPTION, ACCEPT_SUBSCRIPTION, DECLINE_SUBSCRIPTION
 } from "../constants/actionTypes";
 import {combineReducers} from "redux";
+import {STATUS_ACCEPTED} from "../constants/constants";
 
 // Reducer for authentication and logout
 const authReducer = (state = {isLogin: false, isAuthenticating: false}, action) => {
@@ -60,6 +61,25 @@ const subscriptionReducer = (state = initialSubscriptionState, action) => {
       const subscriptions = [...state.subscriptions, action.payload];
       localStorage.setItem('subscriptors', JSON.stringify(subscriptions));
       return {...state, subscriptions: subscriptions};
+    case ACCEPT_SUBSCRIPTION:
+      const subscriptionModified = action.payload;
+      // get subscriptions with new subscription modified
+      const subscriptionsModified = state.subscriptions.map(subscriptionLoop => {
+        if(subscriptionLoop.userCreator === subscriptionModified.userCreator
+        && subscriptionLoop.userReceiver === subscriptionModified.userReceiver){
+          subscriptionLoop.status = STATUS_ACCEPTED;
+        }
+        return subscriptionLoop;
+      });
+      localStorage.setItem('subscriptors', JSON.stringify(subscriptionsModified));
+      return {...state, subscriptions: subscriptionsModified};
+    case DECLINE_SUBSCRIPTION:
+      const subscriptionDeclined = action.payload;
+      const subscriptionsWithoutDeclined = state.subscriptions.filter(subscription =>
+          subscription.userCreator !== subscriptionDeclined.userCreator
+          && subscription.userReceiver !== subscriptionDeclined.userReceiver);
+      localStorage.setItem('subscriptors', JSON.stringify(subscriptionsWithoutDeclined));
+      return {...state, subscriptions: subscriptionsWithoutDeclined};
     default:
       return state;
   }

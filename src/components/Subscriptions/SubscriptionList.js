@@ -17,7 +17,9 @@ class SubscriptionList extends Component {
   render(){
     const subscriptionsRequest = this.getSubscriptionsRequest();
     return <div>
-      {subscriptionsRequest.map(subscriptionRequest => <SubscriptionRequest />)}
+      {subscriptionsRequest.map(subscriptionRequest =>
+          <SubscriptionRequest key={subscriptionRequest.userReceiver} subscription={subscriptionRequest}/>
+      )}
     </div>
   }
 }
@@ -25,7 +27,4 @@ class SubscriptionList extends Component {
 export default connect(state =>({
   user: state.auth.user,
   subscriptions: state.subscription.subscriptions
-}), dispatch => ({
-  acceptSubscription: subscription => dispatch(acceptSubscription(subscription)),
-  declineSubscription: subscription => dispatch(declineSubscription(subscription))
 }))(SubscriptionList);

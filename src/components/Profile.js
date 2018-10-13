@@ -7,17 +7,11 @@ import ArticleList from './Article/ArticleList';
 import ArticleForm from './Article/ArticleForm';
 import {addSubscriptions} from "../actions";
 import {STATUS_ACCEPTED, STATUS_PENDING} from "../constants/constants";
+import {refreshAuthor} from "../utils/utils";
 
 class Profile extends Component {
   state = {
     author: null,
-  };
-
-  refreshAuthor = (props) => {
-    const id = props.match.params.id || props.user.login.uuid;
-    const author = this.props.authors.filter(author =>
-        author.login.uuid === id)[0];
-    this.setState({author: author});
   };
 
   createSubscription = () => {
@@ -37,19 +31,22 @@ class Profile extends Component {
     const authorId = this.state.author.login.uuid;
     // get subscription if exists
     let subscription = subscriptions.filter(
-        subscription => (userId === subscription.userCreator || authorId === subscription.userReceiver)
+        subscription => (userId === subscription.userCreator && authorId === subscription.userReceiver)
     );
     // if not exists return null
     if(subscription.length === 0) return null;
-    return subscription;
+
+    return subscription[0];
   };
 
   componentWillMount() {
-    this.refreshAuthor(this.props);
+    const id =  this.props.match.params.id || this.props.user.login.uuid;
+    refreshAuthor(this, id, this.props.authors);
   }
 
   componentWillReceiveProps(newProps) {
-    this.refreshAuthor(newProps);
+    const id =  newProps.match.params.id || newProps.user.login.uuid;
+    refreshAuthor(this, id, this.props.authors);
   }
 
   render() {
@@ -77,7 +74,7 @@ class Profile extends Component {
       { (!isLoggedUser && isSubscriptor) &&
         <ArticleList userId={this.state.author.login.uuid}/>
       }
-      { !subscription &&
+      { (!isLoggedUser && !subscription) &&
           <button onClick={this.createSubscription}>Suscribirse</button>
       }
     </Main>
