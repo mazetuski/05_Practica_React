@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from '../logo.svg';
 import Nav from './Nav';
 import {connect} from 'react-redux';
 
 const Header = (props) =>
     <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo"/>
-      <h1 className="App-title">Welcome to React</h1>
+      <h1>Miguel Ángel Zamora Blanco</h1>
+      <h2 className="App-title">Practica 5</h2>
       {props.isLogin && <Nav/>}
     </header>;
 

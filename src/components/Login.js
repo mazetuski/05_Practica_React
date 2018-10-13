@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {authByApi} from "../actions";
+import styled from 'styled-components';
 
 class ConnectedLogin extends Component {
   state = {
@@ -10,7 +11,7 @@ class ConnectedLogin extends Component {
   };
 
   handleInput = (event) => {
-    this.setState({ [event.target.id]: event.target.value });
+    this.setState({[event.target.id]: event.target.value});
   };
 
   handleSubmit = () => {
@@ -18,8 +19,7 @@ class ConnectedLogin extends Component {
   };
 
   render() {
-    return <div>
-      <h1>Logueado: {this.props.isLogin ? 'Si' : 'No'}</h1>
+    return <div className={this.props.className}>
       <div>
         <label htmlFor="">Username</label>
         <input type="text" id='username' value={this.state.username} onChange={this.handleInput}/>
@@ -33,12 +33,16 @@ class ConnectedLogin extends Component {
   }
 }
 
-const Login = connect(
-    state => ({
-      isLogin: state.auth.isLogin,
-    }),
-    dispatch => ({
-      auth: (username, password) => dispatch(authByApi(username, password)),
-    }))(ConnectedLogin);
-
-export default Login;
+export default connect(state => ({
+  isLogin: state.auth.isLogin,
+}), dispatch => ({
+  auth: (username, password) => dispatch(authByApi(username, password)),
+}))(styled(ConnectedLogin)`
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  & div {
+    flex: 0 0 100%;
+  }
+`);

@@ -20,8 +20,8 @@ export const authByApi = (username, password) => async dispatch => {
       user => user.login.username === username && user.login.password === password
   );
   // if not coincidence return not login
-  if (!user) {
-    dispatch({type: LOGIN_ERROR});
+  if (!user || user.length === 0) {
+    return dispatch({type: LOGIN_ERROR});
   }
   dispatch({type: LOGIN_SUCCESS, payload: user[0]});
 };

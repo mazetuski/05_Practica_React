@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {acceptSubscription, declineSubscription} from "../../actions";
 import {STATUS_PENDING} from "../../constants/constants";
 import SubscriptionRequest from './SubscriptionRequest';
 

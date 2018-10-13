@@ -4,7 +4,7 @@ import {
   LOGOUT,
   LOADING_STARTED,
   UPDATE_AUTHORS,
-  ADD_ARTICLE, ADD_SUBSCRIPTION, ACCEPT_SUBSCRIPTION, DECLINE_SUBSCRIPTION
+  ADD_ARTICLE, ADD_SUBSCRIPTION, ACCEPT_SUBSCRIPTION, DECLINE_SUBSCRIPTION, LOGIN_ERROR
 } from "../constants/actionTypes";
 import {combineReducers} from "redux";
 import {STATUS_ACCEPTED} from "../constants/constants";
@@ -17,6 +17,7 @@ const authReducer = (state = {isLogin: false, isAuthenticating: false}, action) 
     case LOGIN_SUCCESS:
       return {...state, isLogin: true, isAuthenticating: false, user: action.payload};
     case LOGOUT:
+    case LOGIN_ERROR:
       return {...state, isLogin: false, isAuthenticating: false, user: null};
     default:
       return state
