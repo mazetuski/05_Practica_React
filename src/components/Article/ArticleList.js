@@ -3,12 +3,12 @@ import Article from './Article';
 import {connect} from 'react-redux';
 
 const ArticleList = (props) => {
-  return <div>
+  return <React.Fragment>
     {props.articles.map(article =>
         article.user === props.userId &&
         <Article key={article.id} title={article.title} description={article.description}/>
     )}
-  </div>
+  </React.Fragment>
 };
 
 export default connect(state => ({

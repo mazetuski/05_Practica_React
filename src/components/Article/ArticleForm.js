@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addArticles} from '../../actions';
+import styled from 'styled-components';
 const uuidv1 = require('uuid/v1');
 
 class ArticleForm extends Component{
@@ -31,7 +32,7 @@ class ArticleForm extends Component{
   };
 
   render(){
-    return <div>
+    return <div className={this.props.className}>
       <div>
         <label htmlFor="title">Title</label>
         <input type="text" id='title' value={this.state.title} onChange={this.handleInput}/>
@@ -49,4 +50,10 @@ export default connect((state, props) => ({
   userId: props.userId
 }), dispatch => ({
   addArticle: article => dispatch(addArticles(article))
-}))(ArticleForm);
+}))(styled(ArticleForm)`
+  
+  & label, & input, & button {
+    display: block;
+  }
+  
+`);

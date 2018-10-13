@@ -15,11 +15,11 @@ class SubscriptionList extends Component {
 
   render(){
     const subscriptionsRequest = this.getSubscriptionsRequest();
-    return <div>
+    return <React.Fragment>
       {subscriptionsRequest.map(subscriptionRequest =>
-          <SubscriptionRequest key={subscriptionRequest.userReceiver} subscription={subscriptionRequest}/>
+          <SubscriptionRequest key={subscriptionRequest.userCreator} subscription={subscriptionRequest}/>
       )}
-    </div>
+    </React.Fragment>
   }
 }
 

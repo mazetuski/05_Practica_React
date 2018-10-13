@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {getAuthors} from "../../actions";
 import Loading from '../Loading';
 import Author from './Author';
+import styled from 'styled-components';
 
 class AuthorList extends Component {
   componentWillMount() {
@@ -13,14 +14,14 @@ class AuthorList extends Component {
   }
 
   render() {
-    return <div>
+    return <div className={this.props.className}>
       {this.props.isLoading
           ? <Loading/>
           : this.props.authors.map(author =>
               <Author
                   key={author.login.uuid}
                   id={author.login.uuid}
-                  image={author.picture.medium}
+                  image={author.picture.large}
                   name={author.name.first}
               />
           )}
@@ -33,4 +34,22 @@ export default connect(state => ({
   isLoading: state.author.isLoading
 }), dispatch => ({
   updateAuthors: () => dispatch(getAuthors())
-}))(AuthorList);
+}))(styled(AuthorList)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  & > div {
+    flex: 1 0 100%;
+    box-sizing: border-box;
+    
+    @media only screen and (min-width: 900px){
+       flex: 1 0 32%;
+    }
+    
+    @media only screen and (min-width: 1200px){
+       flex: 1 0 24%;
+    }
+  } 
+  
+`);

@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 const Header = (props) =>
     <header className="App-header">
       <h1>Miguel Ángel Zamora Blanco</h1>
-      <h2 className="App-title">Practica 5</h2>
+      <h2 className="App-title">Práctica React Redux</h2>
       {props.isLogin && <Nav/>}
     </header>;
 
