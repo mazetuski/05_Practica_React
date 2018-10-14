@@ -78,7 +78,7 @@ const subscriptionReducer = (state = initialSubscriptionState, action) => {
       const subscriptionDeclined = action.payload;
       const subscriptionsWithoutDeclined = state.subscriptions.filter(subscription =>
           subscription.userCreator !== subscriptionDeclined.userCreator
-          && subscription.userReceiver !== subscriptionDeclined.userReceiver);
+          && subscription.userReceiver === subscriptionDeclined.userReceiver);
       localStorage.setItem('subscriptors', JSON.stringify(subscriptionsWithoutDeclined));
       return {...state, subscriptions: subscriptionsWithoutDeclined};
     default:
