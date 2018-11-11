@@ -47,7 +47,8 @@ class ArticleForm extends Component{
 }
 
 export default connect((state, props) => ({
-  userId: props.userId
+  userId: props.userId,
+  articles: state.article.articles,
 }), dispatch => ({
   addArticle: article => dispatch(addArticles(article))
 }))(styled(ArticleForm)`

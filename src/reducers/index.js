@@ -45,7 +45,6 @@ const articleReducer = (state = initialArticleState, action) => {
   switch (action.type){
     case ADD_ARTICLE:
       const articles = [...state.articles, action.payload];
-      localStorage.setItem('articles', JSON.stringify(articles));
       return {...state, articles: articles};
     default:
       return state;
