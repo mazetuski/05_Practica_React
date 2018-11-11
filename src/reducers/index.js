@@ -38,7 +38,7 @@ const authorReducer = (state = {authors: [], isLoading: false, profile: null}, a
 
 // Reducer for articles
 const initialArticleState = {
-  articles: JSON.parse(localStorage.getItem('articles')) || [],
+  articles: [],
 };
 
 const articleReducer = (state = initialArticleState, action) => {
@@ -52,14 +52,13 @@ const articleReducer = (state = initialArticleState, action) => {
 };
 
 const initialSubscriptionState = {
-  subscriptions: JSON.parse(localStorage.getItem('subscriptors')) || []
+  subscriptions: []
 };
 
 const subscriptionReducer = (state = initialSubscriptionState, action) => {
   switch (action.type){
     case ADD_SUBSCRIPTION:
       const subscriptions = [...state.subscriptions, action.payload];
-      localStorage.setItem('subscriptors', JSON.stringify(subscriptions));
       return {...state, subscriptions: subscriptions};
     case ACCEPT_SUBSCRIPTION:
       const subscriptionModified = action.payload;
@@ -71,14 +70,13 @@ const subscriptionReducer = (state = initialSubscriptionState, action) => {
         }
         return subscriptionLoop;
       });
-      localStorage.setItem('subscriptors', JSON.stringify(subscriptionsModified));
       return {...state, subscriptions: subscriptionsModified};
     case DECLINE_SUBSCRIPTION:
       const subscriptionDeclined = action.payload;
       const subscriptionsWithoutDeclined = state.subscriptions.filter(subscription =>
           subscription.userCreator !== subscriptionDeclined.userCreator
-          && subscription.userReceiver === subscriptionDeclined.userReceiver);
-      localStorage.setItem('subscriptors', JSON.stringify(subscriptionsWithoutDeclined));
+          || subscription.userReceiver !== subscriptionDeclined.userReceiver);
+
       return {...state, subscriptions: subscriptionsWithoutDeclined};
     default:
       return state;

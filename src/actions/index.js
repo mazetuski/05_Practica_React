@@ -33,13 +33,7 @@ export const getAuthors = () => async dispatch => {
 };
 
 // Articles
-export const addArticles = article => dispatch => {
-  dispatch({type: ADD_ARTICLE, payload: article});
-  // save in local storage
-  let articles =  JSON.parse(localStorage.getItem('articles'));
-  articles = [...articles, article];
-  localStorage.setItem('articles', JSON.stringify(articles));
-};
+export const addArticles = article => ({type: ADD_ARTICLE, payload: article});
 
 //Subscriptions
 export const addSubscriptions = subscription => ({type: ADD_SUBSCRIPTION, payload: subscription});
